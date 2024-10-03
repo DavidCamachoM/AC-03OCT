@@ -13,14 +13,21 @@ let light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 1, 1).normalize();
 scene.add(light);
 
-// Generar cubos aleatoriamente
+// Generar cubos alterados aleatoriamente
 let cubes = [];
 let cubeCount = Math.floor(Math.random() * 5) + 1; // Entre 1 y 5 cubos
 let spacing = 2; // Distancia entre los cubos
 
 for (let i = 0; i < cubeCount; i++) {
+    // Crear geometría alterada para cada cubo
     let geometry = new THREE.BoxGeometry(1, 1, 1);
-    let material = new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff });
+    
+    // Variar las dimensiones de los cubos para que no sean iguales
+    geometry.scale(Math.random() * 1.5 + 0.5, Math.random() * 1.5 + 0.5, Math.random() * 1.5 + 0.5);
+    
+    // Material alámbrico para la apariencia tipo wireframe
+    let material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff, wireframe: true });
+    
     let cube = new THREE.Mesh(geometry, material);
     cube.position.x = i * spacing; // Alinearlos horizontalmente
     cubes.push(cube);
